@@ -14,13 +14,22 @@ import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
 import javax.swing.JCheckBox;
 import javax.swing.JScrollBar;
+import javax.swing.JList;
+import javax.swing.ListSelectionModel;
+import javax.swing.AbstractListModel;
 
 public class Window implements ActionListener{
 
 	private JFrame frame;
 	private JFrame poopConstructorFrame;
 	private JPanel panel;
+	private JPanel poopPanel;
 	private JButton btnNewPoop;
+	
+	public Poop p;
+	
+	private JTextField txtText;
+	private JList<String> list;
 
 	/**
 	 * Launch the application.
@@ -55,6 +64,39 @@ public class Window implements ActionListener{
 		poopConstructorFrame.setVisible(true);
 		poopConstructorFrame.setLocationRelativeTo(frame);
 		poopConstructorFrame.setAlwaysOnTop(true);
+		
+		poopPanel = new JPanel();
+		poopConstructorFrame.getContentPane().add(poopPanel, BorderLayout.CENTER);
+		
+		txtText = new JTextField();
+		txtText.setText("text");
+		txtText.setVisible(true);
+		frame.getContentPane().add(txtText, BorderLayout.CENTER);
+		txtText.setColumns(10);
+		
+		list = new JList<String>();
+		list.setToolTipText("Select the type of poop.");
+		list.setVisible(true);
+		list.setModel(new AbstractListModel<String>() {
+			String[] values = new String[] {"1", "2", "3", "4", "5", "6", "7"};
+			public String getElementAt(int index) {
+				return values[index-1];
+			}
+			public int getSize() {
+				return 0;
+			}
+		});
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		frame.getContentPane().add(list, BorderLayout.WEST);
+		
+		poopPanel.add(txtText);
+		poopPanel.add(list);
+		
+		makePoop();
+	}
+	
+	public void makePoop() {
+		p = new Poop(null, null, null, 0, 0, 0);
 	}
 	/**
 	 * Initialize the contents of the frame.
@@ -70,6 +112,7 @@ public class Window implements ActionListener{
 		
 		btnNewPoop = new JButton("Make A New Poop");
 		panel.add(btnNewPoop);
+		
 	}
 
 	@Override
