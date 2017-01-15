@@ -19,13 +19,14 @@ public class Poop {
 	private int numOfWipes;
 	private String type;
 
-	public Poop(String location, String note, String color, int stinkLevel, int type) {
+	public Poop(String location, String note, String color, int stinkLevel, int numOfWipes, int type) {
 		this.time = timeFormat.format(LocalDateTime.now());
 		this.date = dateFormat.format(LocalDateTime.now());
 		this.location = location;
 		this.note = note;
 		this.color = color;
 		this.stinkLevel = stinkLevel;
+		this.numOfWipes = numOfWipes;
 		switch (type) {
 		case 1:
 			this.type = "Hard Lumps";
