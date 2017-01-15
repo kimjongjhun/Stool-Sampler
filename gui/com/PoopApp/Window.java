@@ -1,7 +1,8 @@
 package com.PoopApp;
 
 import java.awt.EventQueue;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -14,14 +15,11 @@ import javax.swing.JTabbedPane;
 import javax.swing.JCheckBox;
 import javax.swing.JScrollBar;
 
-public class Window {
+public class Window implements ActionListener{
 
 	private JFrame frame;
+	private JFrame poopConstructorFrame;
 	private JPanel panel;
-	private JTextField txtDate;
-	private JTextField txtTime;
-	private JTextField txtLocation;
-	private JTextField txtNote;
 	private JButton btnNewPoop;
 
 	/**
@@ -45,8 +43,19 @@ public class Window {
 	 */
 	public Window() {
 		initialize();
+		
+		btnNewPoop.addActionListener(this);
 	}
 
+	public void poopCreationFrame() {
+		poopConstructorFrame = new JFrame();
+		poopConstructorFrame.setBounds(100, 100, 640, 480);
+		poopConstructorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		poopConstructorFrame.setTitle("Poop Creation");
+		poopConstructorFrame.setVisible(true);
+		poopConstructorFrame.setLocationRelativeTo(frame);
+		poopConstructorFrame.setAlwaysOnTop(true);
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -59,28 +68,16 @@ public class Window {
 		panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		
-		txtDate = new JTextField();
-		txtDate.setText("Date");
-		panel.add(txtDate);
-		txtDate.setColumns(10);
-		
-		txtTime = new JTextField();
-		txtTime.setText("Time");
-		panel.add(txtTime);
-		txtTime.setColumns(10);
-		
-		txtLocation = new JTextField();
-		txtLocation.setText("Location");
-		panel.add(txtLocation);
-		txtLocation.setColumns(10);
-		
-		txtNote = new JTextField();
-		txtNote.setText("Note");
-		panel.add(txtNote);
-		txtNote.setColumns(10);
-		
-		btnNewPoop = new JButton("New Poop");
+		btnNewPoop = new JButton("Make A New Poop");
 		panel.add(btnNewPoop);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNewPoop) {
+			poopCreationFrame();
+		}
+		
 	}
 
 }
