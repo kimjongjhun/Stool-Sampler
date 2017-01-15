@@ -1,7 +1,6 @@
 package com.PoopApp;
 
 import java.time.LocalDateTime;
-import java.time.LocalDateTime.*;
 import java.time.format.DateTimeFormatter;
 
 public class Poop {
